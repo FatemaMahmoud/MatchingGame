@@ -1,6 +1,7 @@
 package com.example.user.matchingarcticanimals;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Handler;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
@@ -18,29 +19,6 @@ import java.util.Arrays;
 import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
-
-
-class CountUpTimer extends TimerTask {
-
-    private TextView tv;
-    private int timer;
-
-    CountUpTimer(TextView tv){
-        this.tv = tv;
-        timer = 0;
-    }
-
-    @Override
-    public void run() {
-        tv.setText(timer + " sec");
-        timer++;
-    }
-
-    public int getTimer(){
-        return timer;
-    }
-}
-
 
 public class MainActivity extends AppCompatActivity{
 
@@ -97,14 +75,24 @@ public class MainActivity extends AppCompatActivity{
     }
 
     private void speak(String p){
+
+
         if (p.equals(a)){
             tts.speak("seal", TextToSpeech.QUEUE_FLUSH, null);
+            final MediaPlayer mp = MediaPlayer.create(this, R.raw.seal);
+            mp.start();
         } else if (p.equals(b)){
             tts.speak("penguin", TextToSpeech.QUEUE_FLUSH, null);
+            final MediaPlayer mp = MediaPlayer.create(this, R.raw.penguin);
+            mp.start();
         } else if (p.equals(c)){
             tts.speak("fox", TextToSpeech.QUEUE_FLUSH, null);
+            final MediaPlayer mp = MediaPlayer.create(this, R.raw.fox);
+            mp.start();
         } else {
-            tts.speak("orcas", TextToSpeech.QUEUE_FLUSH, null);
+            tts.speak("orca", TextToSpeech.QUEUE_FLUSH, null);
+            final MediaPlayer mp = MediaPlayer.create(this, R.raw.orca);
+            mp.start();
         }
     }
 
@@ -162,7 +150,7 @@ public class MainActivity extends AppCompatActivity{
         } else if (s.equals(c)){
             return "Fox";
         } else {
-            return "Orcas";
+            return "Orca";
         }
     }
 

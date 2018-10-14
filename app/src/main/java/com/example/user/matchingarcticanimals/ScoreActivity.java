@@ -2,6 +2,7 @@ package com.example.user.matchingarcticanimals;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -26,6 +27,8 @@ public class ScoreActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score);
+
+        startService(new Intent(this, SoundService.class));
 
         lv = (ListView) findViewById(R.id.scores);
         final ImageView backgroundOne = (ImageView) findViewById(R.id.background_one);
@@ -98,29 +101,10 @@ public class ScoreActivity extends AppCompatActivity {
         // [TO_DO_B8]
         // Display a Toast message
     }
+    protected void onDestroy() {
+        //stop service and stop music
+        stopService(new Intent(this, SoundService.class));
+        super.onDestroy();
+    }
 }
 
-class StableArrayAdapter extends ArrayAdapter<String> {
-
-    HashMap<String, Integer> mIdMap = new HashMap<String, Integer>();
-
-    public StableArrayAdapter(Context context, int textViewResourceId,
-                              List<String> objects) {
-        super(context, textViewResourceId, objects);
-        for (int i = 0; i < objects.size(); ++i) {
-            mIdMap.put(objects.get(i), i);
-        }
-    }
-
-    @Override
-    public long getItemId(int position) {
-        String item = getItem(position);
-        return mIdMap.get(item);
-    }
-
-    @Override
-    public boolean hasStableIds() {
-        return true;
-    }
-
-}

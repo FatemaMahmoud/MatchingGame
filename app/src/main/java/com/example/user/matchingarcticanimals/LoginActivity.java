@@ -1,8 +1,11 @@
 package com.example.user.matchingarcticanimals;
 
 import android.animation.ValueAnimator;
+import android.app.Service;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.media.MediaPlayer;
+import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,8 +20,13 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        //sound service
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        startService(new Intent(this, SoundService.class));
 
         TextView tx = (TextView)findViewById(R.id.menu_label);
         final ImageView backgroundOne = (ImageView) findViewById(R.id.background_one);
@@ -59,4 +67,11 @@ public class LoginActivity extends AppCompatActivity {
 
 
     }
+
+    protected void onDestroy() {
+        //stop service and stop music
+        stopService(new Intent(this, SoundService.class));
+        super.onDestroy();
+    }
 }
+
