@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity">
+
+
+    <ImageView
+        android:id="@+id/background_one"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_centerInParent="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/mainbg" />
+
+    <ImageView
+        android:id="@+id/background_two"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_centerInParent="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/mainbg" />
+
+    <TextView
+        android:id="@+id/menu_label"
+        android:layout_width="356dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="20dip"
+        android:layout_marginTop="@android:dimen/app_icon_size"
+        android:gravity="center"
+        android:text="@string/login_text"
+        android:textColor="@android:color/background_light"
+        android:textSize="45sp"/>
+
+    <Button
+        android:id="@+id/play"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|bottom"
+        android:layout_marginBottom="@android:dimen/app_icon_size"
+        android:background="@android:color/transparent"
+        android:fontFamily="@font/chela_one"
+        android:text="@string/login_play"
+        android:textColor="@color/colorOrange"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/login_name"
+        android:textColor="@color/colorOrange"
+        app:fontFamily="@font/chela_one"
+        android:textSize="24sp"
+        android:layout_gravity="center"
+        android:layout_marginTop="@android:dimen/notification_large_icon_height"
+        android:layout_marginRight="@android:dimen/notification_large_icon_height"/>
+
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="@android:dimen/thumbnail_height"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@android:dimen/notification_large_icon_height"
+        android:layout_marginTop="@android:dimen/notification_large_icon_height"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:maxLength="15"
+        android:textColor="@android:color/white"
+        android:textSize="18sp" />
+
+
+</FrameLayout>
