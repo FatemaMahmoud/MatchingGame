@@ -29,12 +29,16 @@ public class MainActivity extends AppCompatActivity{
     private int firstClick = -1;
     private ImageView firstImg;
     private  TextView firstTxt;
-    private TextView timerTv;
+    private volatile TextView timerTv;
     private CountUpTimer cut;
     private TextToSpeech tts;
     private boolean clickable;
     private int cnt;
     private String name;
+    private Timer timer;
+    private TimerTask tt;
+    private Handler thandler = new Handler();
+    private volatile int timerCnt = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,9 +64,8 @@ public class MainActivity extends AppCompatActivity{
         cnt = 0;
         //timer
         timerTv = (TextView) findViewById(R.id.timer);
-        cut = new CountUpTimer(timerTv);
-        Timer timer = new Timer(true);
-        timer.scheduleAtFixedRate(cut, 0, 1000);
+        startTimer();
+
         //img places
         placeImagesRnd();
         //text to speech
@@ -73,6 +76,31 @@ public class MainActivity extends AppCompatActivity{
             }
         });
     }
+
+    private void startTimer() {
+        timer = new Timer();
+        tt = new TimerTask() {
+            public void run() {
+                thandler.post(new Runnable() {
+                    public void run() {
+                        //TODO
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                // Stuff that updates the UI
+                                timerTv.setText(timerCnt + " sec");
+                            }
+                        });
+                        timerCnt++;
+                        Log.d("timerr", timerCnt + "");
+                    }
+                });
+            }
+        };
+        timer.scheduleAtFixedRate(tt, 0, 1000);
+
+    }
+
 
     private void speak(String p){
 
@@ -127,7 +155,7 @@ public class MainActivity extends AppCompatActivity{
             if (++cnt == 4 ){
                 Intent i = new Intent(this, ScoreActivity.class);
                 i.putExtra("name", name);
-                i.putExtra("score", 2000/cut.getTimer());
+                i.putExtra("score", 2000/timerCnt);
                 startActivity(i);
                 finish();
             }
